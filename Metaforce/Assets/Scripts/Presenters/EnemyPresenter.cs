@@ -40,12 +40,41 @@ namespace Presenters
 
         private void InitPatrolPoints()
         {
-            float half = _enemiesConfig.GridSize / 2f;
-            _patrolPoints = new[]
+            var origin = EnemyView.Transform.position;
+            var horizontal = Random.value > 0.5f;
+            var distance = Random.Range(_enemiesConfig.MinPatrolDistance, _enemiesConfig.MaxPatrolDistance);
+            var halfGrid = _enemiesConfig.GridSize / 2f;
+
+            var offset = horizontal
+                ? new Vector3(distance, 0f, 0f)
+                : new Vector3(0f, 0f, distance);
+
+            var pointA = origin + offset;
+            var pointB = origin - offset;
+
+            pointA.x = Mathf.Clamp(pointA.x, -halfGrid, halfGrid);
+            pointA.z = Mathf.Clamp(pointA.z, -halfGrid, halfGrid);
+            pointB.x = Mathf.Clamp(pointB.x, -halfGrid, halfGrid);
+            pointB.z = Mathf.Clamp(pointB.z, -halfGrid, halfGrid);
+
+            if (Random.value > 0.5f)
             {
-                new Vector3(Random.Range(-half, half), 0f, Random.Range(-half, half)),
-                new Vector3(Random.Range(-half, half), 0f, Random.Range(-half, half)),
-            };
+                // Third point: turn the corner
+                var perpDistance = Random.Range(_enemiesConfig.MinPatrolDistance, _enemiesConfig.MaxPatrolDistance);
+                var perpOffset = horizontal
+                    ? new Vector3(0f, 0f, perpDistance)
+                    : new Vector3(perpDistance, 0f, 0f);
+
+                var pointC = pointB + perpOffset;
+                pointC.x = Mathf.Clamp(pointC.x, -halfGrid, halfGrid);
+                pointC.z = Mathf.Clamp(pointC.z, -halfGrid, halfGrid);
+
+                _patrolPoints = new[] { pointA, pointB, pointC };
+            }
+            else
+            {
+                _patrolPoints = new[] { pointA, pointB };
+            }
         }
         
         private void SetupPatrolLoop()

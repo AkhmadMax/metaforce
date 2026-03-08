@@ -23,7 +23,7 @@ namespace Views
         private IEnumerator MoveTowards(Vector3 destination)
         {
             
-            while(Vector2.Distance(Transform.position, destination) > 0.01f)
+            while(Vector3.Distance(Transform.position, destination) > 0.01f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime);
                 yield return null;

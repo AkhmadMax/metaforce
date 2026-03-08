@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f62c6a087574eed8e7ecf07ed537a03, type: 3}
   m_Name: EnemiesConfig
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 7649027480640119867, guid: 60dd83399eed18943a0dd2bd1cfce93b, type: 3}
+  <Prefab>k__BackingField: {fileID: 0}
   <MaxEnemies>k__BackingField: 10
   <Health>k__BackingField: 100
   <RespawnCooldown>k__BackingField: 5
-  <MinPatrolDistance>k__BackingField: 6
-  <MaxPatrolDistance>k__BackingField: 12
+  <GridSize>k__BackingField: 20
   <SpawnRange>k__BackingField: 8
+  <MinPatrolDistance>k__BackingField: 3
+  <MaxPatrolDistance>k__BackingField: 12

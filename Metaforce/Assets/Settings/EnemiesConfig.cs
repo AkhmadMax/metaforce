@@ -13,5 +13,7 @@ namespace Settings
         [field: SerializeField] public float RespawnCooldown { get; private set; } = 5;
         [field: SerializeField] public float GridSize { get; private set; } = 20;
         [field: SerializeField] public float SpawnRange { get; private set; } = 8;
+        [field: SerializeField] public float MinPatrolDistance { get; private set; } = 3f;
+        [field: SerializeField] public float MaxPatrolDistance { get; private set; } = 12f;
     }
 }
