@@ -90,9 +90,9 @@ namespace Metaforce.Enemy
             pointB.x = Mathf.Clamp(pointB.x, -halfGrid, halfGrid);
             pointB.z = Mathf.Clamp(pointB.z, -halfGrid, halfGrid);
 
+            // With 50% chance add a third Waypoint
             if (Random.value > 0.5f)
             {
-                // Third point: turn the corner
                 var perpDistance = Random.Range(_enemiesConfig.MinPatrolDistance, _enemiesConfig.MaxPatrolDistance);
                 var perpOffset = horizontal
                     ? new Vector3(0f, 0f, perpDistance)

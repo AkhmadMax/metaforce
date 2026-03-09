@@ -34,7 +34,7 @@ namespace Metaforce.Player
             _laser.enabled = false;
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             if (_laserTarget == null) return;
 

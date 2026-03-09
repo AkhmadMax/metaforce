@@ -16,22 +16,29 @@ namespace Metaforce
 
         protected override void Configure(IContainerBuilder builder)
         {
+            // Configs
             builder.RegisterInstance(playerConfig);
             builder.RegisterInstance(enemiesConfig);
+
+            // Core Services
+            builder.Register<InputActionsReference>(Lifetime.Singleton)
+                .WithParameter(inputAction);
+            builder.RegisterEntryPoint<InputProvider>()
+                .As<IInputProvider>();
             builder.Register<ScoreService>(Lifetime.Singleton)
                 .As<IScoreService>();
 
-            
-            builder.Register<InputActionsReference>(Lifetime.Singleton)
-                .WithParameter(inputAction);
-
-            builder.RegisterEntryPoint<InputProvider>()
-                .As<IInputProvider>();
-
+            // Player
             builder.RegisterComponentInHierarchy<PlayerView>();
             builder.Register<PlayerModel>(Lifetime.Singleton);
             builder.RegisterEntryPoint<PlayerMovementPresenter>();
-            
+            builder.RegisterEntryPoint<PlayerAttackPresenter>();
+
+            // Enemy
+            builder.Register<EnemiesFinder>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<EnemySpawnService>()
+                .As<IEnemyRegistry>()
+                .AsSelf();
             builder.RegisterFactory<Vector3, EnemyPresenter>(container =>
             {
                 var config = container.Resolve<EnemiesConfig>();
@@ -44,15 +51,6 @@ namespace Metaforce
                     return new EnemyPresenter(model, view, config);
                 };
             }, Lifetime.Singleton);
-            
-            builder.Register<EnemiesFinder>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<EnemySpawnService>()
-                .As<IEnemyRegistry>()
-                .AsSelf();
-            
-            builder.RegisterEntryPoint<PlayerAttackPresenter>();
-
-
         }
     }
 }

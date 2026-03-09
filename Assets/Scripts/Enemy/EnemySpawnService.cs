@@ -18,9 +18,7 @@ namespace Metaforce.Enemy
 
         public IReadOnlyList<IEnemy> ActiveEnemies => _enemies;
 
-        public EnemySpawnService(
-            Func<Vector3, EnemyPresenter> createEnemy,
-            EnemiesConfig config, IScoreService scoreService)
+        public EnemySpawnService(Func<Vector3, EnemyPresenter> createEnemy, EnemiesConfig config, IScoreService scoreService)
         {
             _createEnemy = createEnemy;
             _config = config;
@@ -41,13 +39,9 @@ namespace Metaforce.Enemy
 
             presenter.Damageable.IsDead
                 .Where(dead => dead)
+                .Do(_ => _scoreService.AddScore())
                 .Delay(TimeSpan.FromSeconds(_config.RespawnCooldown))
                 .Subscribe(_ => presenter.Respawn(GetRandomPosition()))
-                .AddTo(_disposables);
-            
-            presenter.Damageable.IsDead
-                .Where(dead => dead)
-                .Subscribe(_ => _scoreService.AddScore())
                 .AddTo(_disposables);
         }
 
