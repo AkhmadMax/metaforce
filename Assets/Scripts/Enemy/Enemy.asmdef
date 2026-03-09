@@ -1,0 +1,17 @@
+{
+    "name": "Enemy",
+    "rootNamespace": "",
+    "references": [
+        "Core",
+        "UniRx",
+        "VContainer"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "noEngineReferences": false
+}
