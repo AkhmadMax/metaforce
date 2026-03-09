@@ -13,12 +13,12 @@ namespace Presenters
     {
         private readonly PlayerModel _model;
         private readonly PlayerConfig _config;
-        private readonly TargetFinder _targetFinder;
+        private readonly EnemiesFinder _targetFinder;
         private readonly PlayerView _view;
 
         private readonly CompositeDisposable _disposables = new();
 
-        public PlayerAttackPresenter(PlayerModel model, PlayerConfig config, TargetFinder targetFinder, PlayerView view)
+        public PlayerAttackPresenter(PlayerModel model, PlayerConfig config, EnemiesFinder targetFinder, PlayerView view)
         {
             this._model = model;
             this._config = config;

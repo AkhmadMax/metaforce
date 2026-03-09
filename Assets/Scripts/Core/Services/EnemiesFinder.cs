@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class TargetFinder
+    public class EnemiesFinder
     {
         private readonly EnemySpawnService _spawnService;
 
-        public TargetFinder(EnemySpawnService spawnService)
+        public EnemiesFinder(EnemySpawnService spawnService)
         {
             _spawnService = spawnService;
         }
