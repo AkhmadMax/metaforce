@@ -4,6 +4,7 @@ using UniRx;
 using UnityEngine;
 
 using Metaforce.Core;
+using TMPro;
 
 namespace Metaforce.Enemy
 {
@@ -12,6 +13,7 @@ namespace Metaforce.Enemy
         private Coroutine _moveRoutine;
         private readonly Subject<Unit> _onArrived = new();
         public IObservable<Unit> OnArrived => _onArrived;
+        public TMP_Text healthText;
         
         public Transform Transform => transform;
         

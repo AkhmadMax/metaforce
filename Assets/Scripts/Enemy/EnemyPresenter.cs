@@ -34,6 +34,14 @@ namespace Metaforce.Enemy
             SetupPatrolLoop();
             SetupDeathHandler();
             BeginPatrol();
+            SetupDamageHandler();
+        }
+
+        private void SetupDamageHandler()
+        {
+            _enemyModel.CurrentHp
+                .Subscribe(value => _enemyView.healthText.text = value.ToString())
+                .AddTo(_disposables);
         }
 
         private void SetupDeathHandler()

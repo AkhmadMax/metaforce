@@ -17,10 +17,10 @@ namespace Metaforce.Player
 
         public PlayerAttackPresenter(PlayerModel model, PlayerConfig config, EnemiesFinder targetFinder, PlayerView view)
         {
-            this._model = model;
-            this._config = config;
-            this._targetFinder = targetFinder;
-            this._view = view;
+            _model = model;
+            _config = config;
+            _targetFinder = targetFinder;
+            _view = view;
         }
 
         public void Start()
@@ -59,7 +59,6 @@ namespace Metaforce.Player
 
             if (target.Damageable.IsDead.Value)
             {
-                _model.RegisterKill();
                 _view.HideLaser();
             }
         }

@@ -1,4 +1,5 @@
-﻿using Metaforce.Core;
+﻿using System;
+using Metaforce.Core;
 using UniRx;
 using UnityEngine;
 
@@ -6,25 +7,27 @@ namespace Metaforce.Enemy
 {
     public class EnemyModel : IDamageable
     {
-        private ReactiveProperty<int> CurrentHp { get; }
+        public IReadOnlyReactiveProperty<int> CurrentHp => _currentHp;
         public IReadOnlyReactiveProperty<bool> IsDead { get; }
+        
+        private IReactiveProperty<int> _currentHp;
 
 
         public EnemyModel(int hp)
         {
-            CurrentHp = new ReactiveProperty<int>(hp);
-            IsDead = CurrentHp.Select(hp => hp <= 0).ToReactiveProperty();
+            _currentHp = new ReactiveProperty<int>(hp);
+            IsDead = CurrentHp.Select(value => value <= 0).ToReactiveProperty();
 
         }
         
         public void TakeDamage(int damage)
         {
-            CurrentHp.Value = Mathf.Max(0, CurrentHp.Value - damage);
+            _currentHp.Value = Mathf.Max(0, _currentHp.Value - damage);
         }
 
         public void Reset(int health)
         {
-            CurrentHp.Value = health;
+            _currentHp.Value = health;
         }
     }
 }

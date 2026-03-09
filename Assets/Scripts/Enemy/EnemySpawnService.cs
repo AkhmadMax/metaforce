@@ -12,6 +12,7 @@ namespace Metaforce.Enemy
     {
         private readonly Func<Vector3, EnemyPresenter> _createEnemy;
         private readonly EnemiesConfig _config;
+        private readonly IScoreService _scoreService;
         private readonly List<EnemyPresenter> _enemies = new();
         private readonly CompositeDisposable _disposables = new();
 
@@ -19,10 +20,11 @@ namespace Metaforce.Enemy
 
         public EnemySpawnService(
             Func<Vector3, EnemyPresenter> createEnemy,
-            EnemiesConfig config)
+            EnemiesConfig config, IScoreService scoreService)
         {
             _createEnemy = createEnemy;
             _config = config;
+            _scoreService = scoreService;
         }
 
         public void Start()
@@ -41,6 +43,11 @@ namespace Metaforce.Enemy
                 .Where(dead => dead)
                 .Delay(TimeSpan.FromSeconds(_config.RespawnCooldown))
                 .Subscribe(_ => presenter.Respawn(GetRandomPosition()))
+                .AddTo(_disposables);
+            
+            presenter.Damageable.IsDead
+                .Where(dead => dead)
+                .Subscribe(_ => _scoreService.AddScore())
                 .AddTo(_disposables);
         }
 

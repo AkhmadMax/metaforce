@@ -18,6 +18,9 @@ namespace Metaforce
         {
             builder.RegisterInstance(playerConfig);
             builder.RegisterInstance(enemiesConfig);
+            builder.Register<ScoreService>(Lifetime.Singleton)
+                .As<IScoreService>();
+
             
             builder.Register<InputActionsReference>(Lifetime.Singleton)
                 .WithParameter(inputAction);
@@ -49,7 +52,7 @@ namespace Metaforce
             
             builder.RegisterEntryPoint<PlayerAttackPresenter>();
 
-            
+
         }
     }
 }

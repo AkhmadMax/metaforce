@@ -1,13 +1,12 @@
 ﻿using System;
+using UniRx;
 
 namespace Metaforce.Core
 {
     public interface IScoreService
     {
-        event Action<int> ScoreChanged;
-        
-        int CurrentScore { get; }
-        void AddScore();
-        void SubtractScore();
+        IReadOnlyReactiveProperty<int> Score { get; }
+        public void AddScore();
+
     }
 }
