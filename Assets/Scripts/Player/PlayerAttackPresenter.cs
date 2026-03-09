@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Core;
 using Core.Models;
 using DefaultNamespace;
@@ -38,10 +38,10 @@ namespace Presenters
                     var target = _targetFinder.GetClosest(_view.Transform, _config.AttackRadius);
                     if (target != null)
                     {
-                        _view.ShowLaser(target.EnemyView.Transform);
-                        target.EnemyModel.TakeDamage(Mathf.CeilToInt(_config.AttackDamage));
+                        _view.ShowLaser(target.Targetable.Transform);
+                        target.Damageable.TakeDamage(Mathf.CeilToInt(_config.AttackDamage));
 
-                        if (target.EnemyModel.IsDead.Value)
+                        if (target.Damageable.IsDead.Value)
                         {
                             _model.RegisterKill();
                             _view.HideLaser();

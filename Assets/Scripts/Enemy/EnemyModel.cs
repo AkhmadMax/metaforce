@@ -1,9 +1,10 @@
-﻿using UniRx;
+﻿using Core.Interfaces;
+using UniRx;
 using UnityEngine;
 
 namespace Core.Models
 {
-    public class EnemyModel
+    public class EnemyModel : IDamageable
     {
         private ReactiveProperty<int> CurrentHp { get; }
         public IReadOnlyReactiveProperty<bool> IsDead { get; }

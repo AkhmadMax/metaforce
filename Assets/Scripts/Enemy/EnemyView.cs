@@ -3,9 +3,11 @@ using System.Collections;
 using UniRx;
 using UnityEngine;
 
+using Core.Interfaces;
+
 namespace Views
 {
-    public class EnemyView : MonoBehaviour
+    public class EnemyView : MonoBehaviour, ITargetable
     {
         private Coroutine _moveRoutine;
         private readonly Subject<Unit> _onArrived = new();

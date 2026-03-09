@@ -1,4 +1,4 @@
-﻿using Presenters;
+using Core.Interfaces;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -12,17 +12,17 @@ namespace DefaultNamespace
             _spawnService = spawnService;
         }
 
-        public EnemyPresenter GetClosest(Transform origin, float radius)
+        public IEnemy GetClosest(Transform origin, float radius)
         {
-            EnemyPresenter closest = null;
+            IEnemy closest = null;
             var minDistance = float.MaxValue;
 
             foreach (var enemy in _spawnService.ActiveEnemies)
             {
-                if (enemy.EnemyModel.IsDead.Value) continue;
+                if (enemy.Damageable.IsDead.Value) continue;
 
                 var distance = Vector3.Distance(
-                    origin.position, enemy.EnemyView.Transform.position);
+                    origin.position, enemy.Targetable.Transform.position);
 
                 if (distance > radius) continue;
                 if (distance >= minDistance) continue;

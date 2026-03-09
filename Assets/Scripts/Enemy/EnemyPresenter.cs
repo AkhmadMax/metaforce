@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Interfaces;
 using Core.Models;
 using Settings;
 using UniRx;
@@ -9,10 +10,13 @@ using Random = UnityEngine.Random;
 
 namespace Presenters
 {
-    public class EnemyPresenter : IStartable, IDisposable
+    public class EnemyPresenter : IStartable, IDisposable, IEnemy
     {
-        public readonly EnemyModel EnemyModel;
-        public readonly EnemyView EnemyView;
+        private readonly EnemyModel _enemyModel;
+        private readonly EnemyView _enemyView;
+
+        public IDamageable Damageable => _enemyModel;
+        public ITargetable Targetable => _enemyView;
         private readonly EnemiesConfig _enemiesConfig;
         
         private Vector3[] _patrolPoints;
@@ -22,8 +26,8 @@ namespace Presenters
         public EnemyPresenter(EnemyModel enemyModel, EnemyView enemyView, EnemiesConfig enemiesConfig)
         {
 
-            EnemyModel = enemyModel;
-            EnemyView = enemyView;
+            _enemyModel = enemyModel;
+            _enemyView = enemyView;
             _enemiesConfig = enemiesConfig;
         }
 
@@ -37,21 +41,21 @@ namespace Presenters
 
         private void SetupDeathHandler()
         {
-            EnemyModel.IsDead
+            _enemyModel.IsDead
                 .Where(dead => dead)
                 .Subscribe(_ =>
                 {
-                    EnemyView.Stop();
-                    EnemyView.gameObject.SetActive(false);
+                    _enemyView.Stop();
+                    _enemyView.gameObject.SetActive(false);
                 })
                 .AddTo(_disposables);
         }
 
         public void Respawn(Vector3 position)
         {
-            EnemyView.transform.position = position;
-            EnemyView.gameObject.SetActive(true);
-            EnemyModel.Reset(_enemiesConfig.Health);
+            _enemyView.transform.position = position;
+            _enemyView.gameObject.SetActive(true);
+            _enemyModel.Reset(_enemiesConfig.Health);
             _currentIndex = 0;
             InitPatrolPoints();
             BeginPatrol();
@@ -59,12 +63,12 @@ namespace Presenters
         
         private void BeginPatrol()
         {
-            EnemyView.SetDestination(_patrolPoints[0]);
+            _enemyView.SetDestination(_patrolPoints[0]);
         }
 
         private void InitPatrolPoints()
         {
-            var origin = EnemyView.Transform.position;
+            var origin = _enemyView.Transform.position;
             var horizontal = Random.value > 0.5f;
             var distance = Random.Range(_enemiesConfig.MinPatrolDistance, _enemiesConfig.MaxPatrolDistance);
             var halfGrid = _enemiesConfig.GridSize / 2f;
@@ -103,11 +107,11 @@ namespace Presenters
         
         private void SetupPatrolLoop()
         {
-            EnemyView.OnArrived
+            _enemyView.OnArrived
                 .Subscribe(_ =>
                 {
                     _currentIndex = (_currentIndex + 1) % _patrolPoints.Length;
-                    EnemyView.SetDestination(_patrolPoints[_currentIndex]);
+                    _enemyView.SetDestination(_patrolPoints[_currentIndex]);
                 })
                 .AddTo(_disposables);
         }

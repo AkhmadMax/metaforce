@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Interfaces;
 using Core.Models;
 using Presenters;
 using Settings;
@@ -17,7 +18,7 @@ namespace DefaultNamespace
         private readonly List<EnemyPresenter> _enemies = new();
         private readonly CompositeDisposable _disposables = new();
 
-        public IReadOnlyList<EnemyPresenter> ActiveEnemies => _enemies;
+        public IReadOnlyList<IEnemy> ActiveEnemies => _enemies;
 
         public EnemySpawnService(
             Func<Vector3, EnemyPresenter> createEnemy,
@@ -39,7 +40,7 @@ namespace DefaultNamespace
             presenter.Start();
             _enemies.Add(presenter);
 
-            presenter.EnemyModel.IsDead
+            presenter.Damageable.IsDead
                 .Where(dead => dead)
                 .Delay(TimeSpan.FromSeconds(_config.RespawnCooldown))
                 .Subscribe(_ => presenter.Respawn(GetRandomPosition()))
