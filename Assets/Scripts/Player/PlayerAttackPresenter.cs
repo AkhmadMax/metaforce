@@ -27,34 +27,41 @@ namespace Metaforce.Player
         {
             _model.IsMoving
                 .Where(moving => !moving)
-                .SelectMany(_ =>
-                    Observable.Interval(TimeSpan.FromSeconds(1f / _config.AttackSpeed))
-                        .TakeUntil(_model.IsMoving.Where(m => m)))
-                .Subscribe(_ =>
-                {
-                    var target = _targetFinder.GetClosest(_view.Transform, _config.AttackRadius);
-                    if (target != null)
-                    {
-                        _view.ShowLaser(target.Targetable.Transform);
-                        target.Damageable.TakeDamage(Mathf.CeilToInt(_config.AttackDamage));
-
-                        if (target.Damageable.IsDead.Value)
-                        {
-                            _model.RegisterKill();
-                            _view.HideLaser();
-                        }
-                    }
-                    else
-                    {
-                        _view.HideLaser();
-                    }
-                })
+                .SelectMany(_ => CreateAttackInterval())
+                .Subscribe(_ => AttackClosestTarget())
                 .AddTo(_disposables);
 
             _model.IsMoving
                 .Where(moving => moving)
                 .Subscribe(_ => _view.HideLaser())
                 .AddTo(_disposables);
+        }
+
+        private IObservable<long> CreateAttackInterval()
+        {
+            return Observable.Interval(TimeSpan.FromSeconds(1f / _config.AttackSpeed))
+                .TakeUntil(_model.IsMoving.Where(m => m));
+        }
+
+        private void AttackClosestTarget()
+        {
+            var target = _targetFinder.GetClosest(_view.Transform, _config.AttackRadius);
+            if (target != null)
+                HandleTargetHit(target);
+            else
+                _view.HideLaser();
+        }
+
+        private void HandleTargetHit(IEnemy target)
+        {
+            _view.ShowLaser(target.Targetable.Transform);
+            target.Damageable.TakeDamage(Mathf.CeilToInt(_config.AttackDamage));
+
+            if (target.Damageable.IsDead.Value)
+            {
+                _model.RegisterKill();
+                _view.HideLaser();
+            }
         }
 
         public void Dispose()
