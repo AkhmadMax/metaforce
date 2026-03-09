@@ -15,17 +15,18 @@ namespace Metaforce.Enemy
         public IDamageable Damageable => _enemyModel;
         public ITargetable Targetable => _enemyView;
         private readonly EnemiesConfig _enemiesConfig;
-        
+        private readonly IScoreService _scoreService;
+
         private Vector3[] _patrolPoints;
         private int _currentIndex;
         private readonly CompositeDisposable _disposables = new();
 
-        public EnemyPresenter(EnemyModel enemyModel, EnemyView enemyView, EnemiesConfig enemiesConfig)
+        public EnemyPresenter(EnemyModel enemyModel, EnemyView enemyView, EnemiesConfig enemiesConfig, IScoreService scoreService)
         {
-
             _enemyModel = enemyModel;
             _enemyView = enemyView;
             _enemiesConfig = enemiesConfig;
+            _scoreService = scoreService;
         }
 
         public void Start()
@@ -52,8 +53,10 @@ namespace Metaforce.Enemy
                 {
                     _enemyView.Stop();
                     _enemyView.gameObject.SetActive(false);
+                    _scoreService.AddScore();
                 })
                 .AddTo(_disposables);
+
         }
 
         public void Respawn(Vector3 position)

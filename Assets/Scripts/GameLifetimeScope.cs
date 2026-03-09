@@ -36,19 +36,21 @@ namespace Metaforce
 
             // Enemy
             builder.Register<EnemiesFinder>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<EnemyRegistry>()
+                .As<IEnemyRegistry>();
             builder.RegisterEntryPoint<EnemySpawnService>()
-                .As<IEnemyRegistry>()
                 .AsSelf();
             builder.RegisterFactory<Vector3, EnemyPresenter>(container =>
             {
                 var config = container.Resolve<EnemiesConfig>();
+                var scoreService = container.Resolve<IScoreService>();
 
                 return position =>
                 {
                     var view = Instantiate(config.Prefab, position, Quaternion.identity);
                     container.InjectGameObject(view.gameObject);
                     var model = new EnemyModel(config.Health);
-                    return new EnemyPresenter(model, view, config);
+                    return new EnemyPresenter(model, view, config, scoreService);
                 };
             }, Lifetime.Singleton);
         }

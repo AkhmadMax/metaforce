@@ -47,7 +47,8 @@ MonoBehaviour:
   parentReference:
     TypeName: 
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 0}
   inputAction: {fileID: -944628639613478452, guid: 5f60f1317c2b0674c82e96d5597ec8f4, type: 3}
   playerConfig: {fileID: 11400000, guid: 7fc27e067a2491045bcfc246469ab251, type: 2}
   enemiesConfig: {fileID: 11400000, guid: 9e7f726ca2ded974da0539bf5fd240ed, type: 2}

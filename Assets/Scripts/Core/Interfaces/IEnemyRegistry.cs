@@ -4,6 +4,6 @@ namespace Metaforce.Core
 {
     public interface IEnemyRegistry
     {
-        IReadOnlyList<IEnemy> ActiveEnemies { get; }
+        IReadOnlyList<IEnemy> AliveEnemies { get; }
     }
 }

@@ -16,10 +16,8 @@ namespace Metaforce.Core
             IEnemy closest = null;
             var minDistance = float.MaxValue;
 
-            foreach (var enemy in _registry.ActiveEnemies)
+            foreach (var enemy in _registry.AliveEnemies)
             {
-                if (enemy.Damageable.IsDead.Value) continue;
-
                 var distance = Vector3.Distance(
                     origin.position, enemy.Targetable.Transform.position);
 

@@ -4608,10 +4608,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1599346813017148604, guid: 53863176cb6342040af1b556a0e39273, type: 3}
-      propertyPath: autoInjectGameObjects.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1599346813017148604, guid: 53863176cb6342040af1b556a0e39273, type: 3}
       propertyPath: autoInjectGameObjects.Array.data[0]
       value: 
       objectReference: {fileID: 1341559082}
@@ -4814,8 +4810,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 963194228}
-  - {fileID: 7965137939008173035}
   - {fileID: 210671059}
   - {fileID: 5540659726154780697}
   - {fileID: 8761662519084173969}
+  - {fileID: 7965137939008173035}
   - {fileID: 2091487001}

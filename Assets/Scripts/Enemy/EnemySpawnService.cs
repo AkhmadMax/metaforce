@@ -8,21 +8,20 @@ using Random = UnityEngine.Random;
 
 namespace Metaforce.Enemy
 {
-    public class EnemySpawnService : IStartable, IDisposable, IEnemyRegistry
+    public class EnemySpawnService : IStartable, IDisposable
     {
         private readonly Func<Vector3, EnemyPresenter> _createEnemy;
         private readonly EnemiesConfig _config;
-        private readonly IScoreService _scoreService;
+        private readonly Subject<IEnemy> _onEnemyCreated = new();
         private readonly List<EnemyPresenter> _enemies = new();
         private readonly CompositeDisposable _disposables = new();
 
-        public IReadOnlyList<IEnemy> ActiveEnemies => _enemies;
+        public IObservable<IEnemy> OnEnemyCreated => _onEnemyCreated;
 
-        public EnemySpawnService(Func<Vector3, EnemyPresenter> createEnemy, EnemiesConfig config, IScoreService scoreService)
+        public EnemySpawnService(Func<Vector3, EnemyPresenter> createEnemy, EnemiesConfig config)
         {
             _createEnemy = createEnemy;
             _config = config;
-            _scoreService = scoreService;
         }
 
         public void Start()
@@ -36,10 +35,10 @@ namespace Metaforce.Enemy
             var presenter = _createEnemy(position);
             presenter.Start();
             _enemies.Add(presenter);
+            _onEnemyCreated.OnNext(presenter);
 
             presenter.Damageable.IsDead
                 .Where(dead => dead)
-                .Do(_ => _scoreService.AddScore())
                 .Delay(TimeSpan.FromSeconds(_config.RespawnCooldown))
                 .Subscribe(_ => presenter.Respawn(GetRandomPosition()))
                 .AddTo(_disposables);
@@ -56,6 +55,7 @@ namespace Metaforce.Enemy
             foreach (var enemy in _enemies)
                 enemy.Dispose();
             _disposables.Dispose();
+            _onEnemyCreated.Dispose();
         }
     }
 }
