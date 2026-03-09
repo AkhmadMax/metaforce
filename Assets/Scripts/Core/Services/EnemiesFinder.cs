@@ -5,11 +5,11 @@ namespace DefaultNamespace
 {
     public class EnemiesFinder
     {
-        private readonly EnemySpawnService _spawnService;
+        private readonly IEnemyRegistry _registry;
 
-        public EnemiesFinder(EnemySpawnService spawnService)
+        public EnemiesFinder(IEnemyRegistry registry)
         {
-            _spawnService = spawnService;
+            _registry = registry;
         }
 
         public IEnemy GetClosest(Transform origin, float radius)
@@ -17,7 +17,7 @@ namespace DefaultNamespace
             IEnemy closest = null;
             var minDistance = float.MaxValue;
 
-            foreach (var enemy in _spawnService.ActiveEnemies)
+            foreach (var enemy in _registry.ActiveEnemies)
             {
                 if (enemy.Damageable.IsDead.Value) continue;
 

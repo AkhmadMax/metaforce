@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
-    public class EnemySpawnService : IStartable, IDisposable
+    public class EnemySpawnService : IStartable, IDisposable, IEnemyRegistry
     {
         private readonly Func<Vector3, EnemyPresenter> _createEnemy;
         private readonly EnemiesConfig _config;
