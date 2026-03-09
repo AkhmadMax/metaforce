@@ -1,13 +1,10 @@
 using System;
-using Core;
-using Core.Models;
-using DefaultNamespace;
-using Settings;
+using Metaforce.Core;
 using UniRx;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Presenters
+namespace Metaforce.Player
 {
     public class PlayerAttackPresenter : IStartable, IDisposable
     {

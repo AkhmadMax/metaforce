@@ -3,9 +3,9 @@ using System.Collections;
 using UniRx;
 using UnityEngine;
 
-using Core.Interfaces;
+using Metaforce.Core;
 
-namespace now
+namespace Metaforce.Enemy
 {
     public class EnemyView : MonoBehaviour, ITargetable
     {

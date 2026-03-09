@@ -1,14 +1,10 @@
 ﻿using System;
-using Core;
-using Core.Interfaces;
-using Core.Models;
-using Settings;
+using Metaforce.Core;
 using UniRx;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-namespace Presenters
+namespace Metaforce.Player
 {
     public class PlayerMovementPresenter : IStartable, ITickable, IDisposable
     {

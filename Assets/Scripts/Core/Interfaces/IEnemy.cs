@@ -1,4 +1,4 @@
-namespace Core.Interfaces
+namespace Metaforce.Core
 {
     public interface IEnemy
     {

@@ -1,8 +1,8 @@
-﻿using Core.Interfaces;
+﻿using Metaforce.Core;
 using UniRx;
 using UnityEngine;
 
-namespace Core.Models
+namespace Metaforce.Enemy
 {
     public class EnemyModel : IDamageable
     {

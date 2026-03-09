@@ -1,7 +1,6 @@
-using Core.Interfaces;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Metaforce.Core
 {
     public class EnemiesFinder
     {

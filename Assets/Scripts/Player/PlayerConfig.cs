@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Settings
+namespace Metaforce.Player
 {
     [CreateAssetMenu(fileName = "PlayerConfig", menuName = "Configs / Player")]
     public class PlayerConfig : ScriptableObject

@@ -1,14 +1,12 @@
-﻿using Core.Interfaces;
-using Core.Models;
-using DefaultNamespace;
-using Presenters;
-using Settings;
+﻿using Metaforce.Core;
+using Metaforce.Enemy;
+using Metaforce.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
 using VContainer.Unity;
 
-namespace Core
+namespace Metaforce
 {
     public class GameLifetimeScope : LifetimeScope
     {

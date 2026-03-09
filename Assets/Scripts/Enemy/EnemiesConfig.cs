@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Settings
+namespace Metaforce.Enemy
 {
     [CreateAssetMenu(fileName = "EnemiesConfig", menuName = "Configs / Enemies")]
     public class EnemiesConfig : ScriptableObject

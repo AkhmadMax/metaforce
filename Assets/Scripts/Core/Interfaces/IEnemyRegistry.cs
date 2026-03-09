@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Core.Interfaces
+namespace Metaforce.Core
 {
     public interface IEnemyRegistry
     {

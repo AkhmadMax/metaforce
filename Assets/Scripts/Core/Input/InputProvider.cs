@@ -1,10 +1,9 @@
 ﻿using System;
-using Core.Interfaces;
 using UniRx;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Core
+namespace Metaforce.Core
 {
     public class InputProvider : IInputProvider, IStartable
     {

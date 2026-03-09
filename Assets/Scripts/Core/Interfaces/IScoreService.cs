@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Interfaces
+namespace Metaforce.Core
 {
     public interface IScoreService
     {

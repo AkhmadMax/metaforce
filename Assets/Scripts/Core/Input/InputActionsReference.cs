@@ -1,6 +1,6 @@
 ﻿using UnityEngine.InputSystem;
 
-namespace Core
+namespace Metaforce.Core
 {
     public class InputActionsReference
     {

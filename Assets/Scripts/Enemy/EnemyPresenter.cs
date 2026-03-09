@@ -1,14 +1,11 @@
 ﻿using System;
-using Core.Interfaces;
-using Core.Models;
-using Settings;
+using Metaforce.Core;
 using UniRx;
 using UnityEngine;
 using VContainer.Unity;
-using Views;
 using Random = UnityEngine.Random;
 
-namespace Presenters
+namespace Metaforce.Enemy
 {
     public class EnemyPresenter : IStartable, IDisposable, IEnemy
     {

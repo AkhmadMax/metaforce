@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core.Interfaces
+namespace Metaforce.Core
 {
     public interface IInputProvider
     {

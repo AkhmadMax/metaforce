@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Interfaces;
-using Core.Models;
-using Presenters;
-using Settings;
+using Metaforce.Core;
 using UniRx;
 using UnityEngine;
 using VContainer.Unity;
 using Random = UnityEngine.Random;
 
-namespace DefaultNamespace
+namespace Metaforce.Enemy
 {
     public class EnemySpawnService : IStartable, IDisposable, IEnemyRegistry
     {

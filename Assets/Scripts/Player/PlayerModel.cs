@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Core.Models
+namespace Metaforce.Player
 {
     public class PlayerModel
     {
