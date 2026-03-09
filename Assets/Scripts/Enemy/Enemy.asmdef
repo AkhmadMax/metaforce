@@ -1,6 +1,6 @@
 {
     "name": "Enemy",
-    "rootNamespace": "",
+    "rootNamespace": "Metaforce.Enemy",
     "references": [
         "Core",
         "UniRx",

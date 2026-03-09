@@ -1,6 +1,6 @@
 {
     "name": "Player",
-    "rootNamespace": "",
+    "rootNamespace": "Metaforce.Player",
     "references": [
         "Core",
         "UniRx",
