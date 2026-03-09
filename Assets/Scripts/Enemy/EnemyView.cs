@@ -5,7 +5,7 @@ using UnityEngine;
 
 using Core.Interfaces;
 
-namespace Views
+namespace now
 {
     public class EnemyView : MonoBehaviour, ITargetable
     {

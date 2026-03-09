@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "UniRx",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "VContainer"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
