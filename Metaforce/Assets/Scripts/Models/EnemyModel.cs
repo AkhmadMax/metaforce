@@ -20,5 +20,10 @@ namespace Core.Models
         {
             CurrentHp.Value = Mathf.Max(0, CurrentHp.Value - damage);
         }
+
+        public void Reset(int health)
+        {
+            CurrentHp.Value = health;
+        }
     }
 }

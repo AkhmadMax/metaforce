@@ -5,7 +5,12 @@ namespace Core.Models
 {
     public class PlayerModel
     {
-        public ReactiveProperty<bool> _isMoving = new ReactiveProperty<bool>();
-        public ReactiveProperty<int> _frags = new ReactiveProperty<int>();
+        public ReactiveProperty<bool> IsMoving { get; } = new(false);
+        public ReactiveProperty<int> KillCount { get; } = new(0);
+
+        public void RegisterKill()
+        {
+            KillCount.Value++;
+        }
     }
 }

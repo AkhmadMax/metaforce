@@ -31,11 +31,35 @@ namespace Presenters
         {
             InitPatrolPoints();
             SetupPatrolLoop();
+            SetupDeathHandler();
+            BeginPatrol();
+        }
+
+        private void SetupDeathHandler()
+        {
+            EnemyModel.IsDead
+                .Where(dead => dead)
+                .Subscribe(_ =>
+                {
+                    EnemyView.Stop();
+                    EnemyView.gameObject.SetActive(false);
+                })
+                .AddTo(_disposables);
         }
 
         public void Respawn(Vector3 position)
         {
-            
+            EnemyView.transform.position = position;
+            EnemyView.gameObject.SetActive(true);
+            EnemyModel.Reset(_enemiesConfig.Health);
+            _currentIndex = 0;
+            InitPatrolPoints();
+            BeginPatrol();
+        }
+        
+        private void BeginPatrol()
+        {
+            EnemyView.SetDestination(_patrolPoints[0]);
         }
 
         private void InitPatrolPoints()
@@ -79,10 +103,7 @@ namespace Presenters
         
         private void SetupPatrolLoop()
         {
-            EnemyView.SetDestination(_patrolPoints[0]);
-
             EnemyView.OnArrived
-                .Delay(TimeSpan.FromSeconds(1))
                 .Subscribe(_ =>
                 {
                     _currentIndex = (_currentIndex + 1) % _patrolPoints.Length;
@@ -90,7 +111,6 @@ namespace Presenters
                 })
                 .AddTo(_disposables);
         }
-        
         
         public void Dispose()
         {

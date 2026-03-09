@@ -39,7 +39,7 @@ namespace Presenters
         public void Move(Vector2 delta)
         {
             _currentDelta = delta;
-            _playerModel._isMoving.Value = delta.sqrMagnitude > 0.01f;
+            _playerModel.IsMoving.Value = delta.sqrMagnitude > 0.01f;
         }
 
         public void Dispose()

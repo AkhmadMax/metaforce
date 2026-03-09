@@ -44,7 +44,11 @@ namespace Core
                 };
             }, Lifetime.Singleton);
             
-            builder.RegisterEntryPoint<EnemySpawnService>();
+            builder.Register<TargetFinder>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<EnemySpawnService>().AsSelf();
+            
+            builder.RegisterEntryPoint<PlayerAttackPresenter>();
+
             
         }
     }

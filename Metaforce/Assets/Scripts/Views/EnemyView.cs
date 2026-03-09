@@ -32,7 +32,7 @@ namespace Views
 
         }
 
-        private void Stop()
+        public void Stop()
         {
             if(_moveRoutine != null) StopCoroutine(_moveRoutine);
         }
