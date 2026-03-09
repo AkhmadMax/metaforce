@@ -53,7 +53,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 4449324378847013346}
   - component: {fileID: 7343871675249560652}
   - component: {fileID: 5427376223415136026}
-  - component: {fileID: 3859294307343483943}
+  - component: {fileID: 6539894528548659887}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laser: {fileID: 4141684416194671501}
---- !u!143 &3859294307343483943
+--- !u!143 &6539894528548659887
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
