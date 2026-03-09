@@ -10,14 +10,14 @@ namespace Metaforce.Enemy
 {
     public class EnemySpawnService : IStartable, IDisposable
     {
+        public IObservable<IEnemy> OnEnemyCreated => _onEnemyCreated;
+
         private readonly Func<Vector3, EnemyPresenter> _createEnemy;
         private readonly EnemiesConfig _config;
         private readonly Subject<IEnemy> _onEnemyCreated = new();
         private readonly List<EnemyPresenter> _enemies = new();
         private readonly CompositeDisposable _disposables = new();
-
-        public IObservable<IEnemy> OnEnemyCreated => _onEnemyCreated;
-
+        
         public EnemySpawnService(Func<Vector3, EnemyPresenter> createEnemy, EnemiesConfig config)
         {
             _createEnemy = createEnemy;

@@ -1,5 +1,4 @@
-﻿using System;
-using Metaforce.Core;
+﻿using Metaforce.Core;
 using UniRx;
 using UnityEngine;
 
@@ -11,13 +10,11 @@ namespace Metaforce.Enemy
         public IReadOnlyReactiveProperty<bool> IsDead { get; }
         
         private IReactiveProperty<int> _currentHp;
-
-
+        
         public EnemyModel(int hp)
         {
             _currentHp = new ReactiveProperty<int>(hp);
             IsDead = CurrentHp.Select(value => value <= 0).ToReactiveProperty();
-
         }
         
         public void TakeDamage(int damage)

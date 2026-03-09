@@ -9,11 +9,11 @@ namespace Metaforce.Enemy
 {
     public class EnemyPresenter : IStartable, IDisposable, IEnemy
     {
-        private readonly EnemyModel _enemyModel;
-        private readonly EnemyView _enemyView;
-
         public IDamageable Damageable => _enemyModel;
         public ITargetable Targetable => _enemyView;
+        
+        private readonly EnemyModel _enemyModel;
+        private readonly EnemyView _enemyView;
         private readonly EnemiesConfig _enemiesConfig;
         private readonly IScoreService _scoreService;
 

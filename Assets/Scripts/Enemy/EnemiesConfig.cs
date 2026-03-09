@@ -6,7 +6,6 @@ namespace Metaforce.Enemy
     public class EnemiesConfig : ScriptableObject
     {
         [field: SerializeField] public EnemyView Prefab { get; private set; }
-
         [field: SerializeField] public int MaxEnemies { get; private set; } = 10;
         [field: SerializeField] public int Health { get; private set; } = 100;
         [field: SerializeField] public float RespawnCooldown { get; private set; } = 5;

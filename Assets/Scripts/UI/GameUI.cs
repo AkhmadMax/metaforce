@@ -8,7 +8,7 @@ public class GameUI : MonoBehaviour
 {
     [Inject] private IScoreService _scoreService;
     
-    public TMP_Text scoreText;
+    [SerializeField] private TMP_Text scoreText;
 
     private void Start()
     {

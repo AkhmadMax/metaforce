@@ -8,9 +8,9 @@ namespace Metaforce.Player
         [SerializeField] private LineRenderer _laser;
 
         public Transform Transform => transform;
+        
         private CharacterController _characterController;
         private Transform _laserTarget;
-
 
         private void Awake()
         {

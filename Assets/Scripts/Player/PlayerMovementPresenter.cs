@@ -8,14 +8,13 @@ namespace Metaforce.Player
 {
     public class PlayerMovementPresenter : IStartable, ITickable, IDisposable
     {
-        private readonly CompositeDisposable _disposables = new();
-
         private readonly IInputProvider _inputProvider;
         private readonly PlayerModel _playerModel;
         private readonly PlayerView _playerView;
         private readonly PlayerConfig _playerConfig;
 
         private Vector2 _currentDelta;
+        private readonly CompositeDisposable _disposables = new();
         
         public PlayerMovementPresenter(IInputProvider inputProvider, PlayerModel playerModel, PlayerView playerView, PlayerConfig  playerConfig)
         {

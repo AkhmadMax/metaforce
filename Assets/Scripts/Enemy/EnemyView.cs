@@ -10,13 +10,12 @@ namespace Metaforce.Enemy
 {
     public class EnemyView : MonoBehaviour, ITargetable
     {
-        private Coroutine _moveRoutine;
-        private readonly Subject<Unit> _onArrived = new();
         public IObservable<Unit> OnArrived => _onArrived;
+        public Transform Transform => transform;
         public TMP_Text healthText;
         
-        public Transform Transform => transform;
-        
+        private Coroutine _moveRoutine;
+        private readonly Subject<Unit> _onArrived = new();
 
         public void SetDestination(Vector3 destination)
         {
